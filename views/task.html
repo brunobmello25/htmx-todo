@@ -1,0 +1,18 @@
+<li>
+  <p>{{.Title}}</p>
+  <form
+    id="task-{{.Id}}"
+    hx-post="/tasks/{{.Id}}/toggle"
+    hx-trigger="click delay:500ms"
+  >
+    <input
+      type="checkbox"
+      id="task-done"
+      name="task-done"
+      value="true"
+      {{if
+      .Done}}checked{{end}}
+    />
+    <label for="task-done">{{.Title}}</label>
+  </form>
+</li>

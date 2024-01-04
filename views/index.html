@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <title>htmx todo list</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container mx-auto">
+      <h1>Todo List</h1>
+
+      <div id="todos">
+        {{range .Tasks}}
+        <li>
+          <p>{{.Title}}</p>
+          <form
+            id="task-{{.Id}}"
+            hx-post="/tasks/{{.Id}}/toggle"
+            hx-trigger="click delay:500ms"
+          >
+            <input
+              type="checkbox"
+              id="task-done"
+              name="task-done"
+              value="true"
+              {{if
+              .Done}}checked{{end}}
+            />
+            <label for="task-done">{{.Title}}</label>
+          </form>
+        </li>
+        {{end}}
+      </div>
+    </div>
+  </body>
+</html>
